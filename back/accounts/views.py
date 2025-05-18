@@ -122,12 +122,15 @@ def manager_welcome(request):
 @user_passes_test(is_manager, login_url='login')
 def manager_change_password(request):
     if request.method == 'POST':
-        form = ManagerPasswordChangeForm(user=request.user, data=request.POST)
+        form = ManagerPasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Your password was changed successfully.')
             return redirect('manager_change_password')
+        else:
+            for error in form.errors.values():
+                messages.error(request, error)
     else:
-        form = ManagerPasswordChangeForm(user=request.user)
+        form = ManagerPasswordChangeForm(request.user)
     return render(request, 'accounts/manager_change_password.html', {'form': form})
