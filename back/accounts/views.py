@@ -3,8 +3,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.conf import settings
 from django.core.mail import send_mail
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
 from .models import User
-from .forms import ManagerCreateForm
+from .forms import ManagerCreateForm, ManagerPasswordChangeForm
 import random
 import string
 
@@ -115,3 +117,17 @@ def about(request):
 @user_passes_test(is_manager, login_url='login')
 def manager_welcome(request):
     return redirect('data')
+
+@login_required(login_url='login')
+@user_passes_test(is_manager, login_url='login')
+def manager_change_password(request):
+    if request.method == 'POST':
+        form = ManagerPasswordChangeForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was changed successfully.')
+            return redirect('manager_change_password')
+    else:
+        form = ManagerPasswordChangeForm(user=request.user)
+    return render(request, 'accounts/manager_change_password.html', {'form': form})

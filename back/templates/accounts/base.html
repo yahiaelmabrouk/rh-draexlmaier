@@ -61,6 +61,14 @@
               >Accounts</a
             >
             {% endif %}
+            <!-- a -->
+            {% if user.is_authenticated and user.role == 'manager' %}
+            <a
+              href="{% url 'manager_change_password' %}"
+              class="text-sm text-white text-decoration-none"
+              >Change Password</a
+            >
+            {% endif %}
           </nav>
           <!-- Auth Links -->
           <div class="me-3">

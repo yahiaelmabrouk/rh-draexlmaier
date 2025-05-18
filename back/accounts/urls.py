@@ -16,4 +16,5 @@ urlpatterns = [
     path('data/', views.data, name='data'),
     path('accounts/', views.manager_list, name='account_list'),
     path('dashboards/', views.dashboards, name='dashboards'),  # <-- fix: use dashboards view
+    path('manager/change-password/', views.manager_change_password, name='manager_change_password'),
 ]
