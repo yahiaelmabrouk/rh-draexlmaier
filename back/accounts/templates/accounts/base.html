@@ -1,0 +1,268 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}DRAXLMAIER{% endblock %}</title>
+    <!--Bootstrap-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!--Font Awesomeicons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!--Custom CSS-->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    {% block extra_css %}{% endblock %}
+  </head>
+  <body>
+    {% if user.is_authenticated and user.role == 'admin' %}
+    <header class="py-4 px-4 border-bottom border-2 bg-dark text-white">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+          <!-- Logo -->
+          <a
+            href="{% url 'home' %}"
+            class="d-flex align-items-center text-decoration-none"
+          >
+            <img
+              src="{% static 'assets/logo.png' %}"
+              alt="Logo"
+              class="img-fluid"
+              style="height: 50px"
+            />
+          </a>
+
+          <!-- Navigation -->
+          <nav class="d-flex gap-4">
+            <a
+              href="{% url 'home' %}"
+              class="text-sm text-white text-decoration-none"
+              >Home</a
+            >
+            <a
+              href="{% url 'about' %}"
+              class="text-sm text-white text-decoration-none"
+              >About Us</a
+            >
+            <a
+              href="{% url 'data' %}"
+              class="text-sm text-white text-decoration-none"
+              >Dashboard</a
+            >
+            <a
+              href="{% url 'account_list' %}"
+              class="text-sm text-white text-decoration-none"
+              >Accounts</a
+            >
+          </nav>
+          <!-- Auth Links -->
+          <div class="me-3">
+            <a
+              href="{% url 'logout' %}"
+              class="text-decoration-none"
+              style="color: #1da4a4"
+            >
+              <i class="fas fa-sign-out-alt"></i>
+              <span class="d-none d-sm-inline">Log out</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+    {% elif user.is_authenticated and user.role == 'manager' %}
+    <header class="py-4 px-4 border-bottom border-2 bg-dark text-white">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+          <!-- Logo -->
+          <a
+            href="{% url 'manager_welcome' %}"
+            class="d-flex align-items-center text-decoration-none"
+          >
+            <img
+              src="{% static 'assets/logo.png' %}"
+              alt="Logo"
+              class="img-fluid"
+              style="height: 50px"
+            />
+          </a>
+
+          <!-- Navigation -->
+          <nav class="d-flex gap-4">
+            <a
+              href="{% url 'data' %}"
+              class="text-sm text-white text-decoration-none"
+              >Dashboard</a
+            >
+            <a
+              href="{% url 'about' %}"
+              class="text-sm text-white text-decoration-none"
+              >About Us</a
+            >
+          </nav>
+          <!-- Auth Links -->
+          <div class="me-3">
+            <a
+              href="{% url 'logout' %}"
+              class="text-decoration-none"
+              style="color: #1da4a4"
+            >
+              <i class="fas fa-sign-out-alt"></i>
+              <span class="d-none d-sm-inline">Log out</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+    {% else %}
+    <!-- Navbar for unauthenticated users -->
+    <header class="py-4 px-4 border-bottom border-2 bg-dark text-white">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+          <!-- Logo -->
+          <a
+            href="{% url 'home' %}"
+            class="d-flex align-items-center text-decoration-none"
+          >
+            <img
+              src="{% static 'assets/logo.png' %}"
+              alt="Logo"
+              class="img-fluid"
+              style="height: 50px"
+            />
+          </a>
+          <!-- Navigation -->
+          <nav class="d-flex gap-4">
+            <a
+              href="{% url 'home' %}"
+              class="text-sm text-white text-decoration-none"
+              >Home</a
+            >
+            <a
+              href="{% url 'about' %}"
+              class="text-sm text-white text-decoration-none"
+              >About Us</a
+            >
+            <a
+              href="{% url 'login' %}"
+              class="text-sm text-white text-decoration-none"
+              >Login</a
+            >
+          </nav>
+        </div>
+      </div>
+    </header>
+    {% endif %}
+    <!-- Main Content -->
+    <main>{% block content %}{% endblock %}</main>
+
+    {% if not request.resolver_match or request.resolver_match.url_name !=
+    'login' %}
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5 border-top border-2">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="fs-4 fw-bold mb-3">DRAXLMAIER</div>
+            <p class="text-muted small mb-4">
+              Advanced technology solutions for industry leaders.
+            </p>
+          </div>
+          <div class="col-md-9">
+            <div class="row">
+              <div class="col-md-4">
+                <h5 class="mb-3" style="color: #1da4a4">Navigation</h5>
+                <ul class="list-unstyled">
+                  <li class="mb-2">
+                    <a
+                      href="{% url 'home' %}"
+                      class="text-muted small text-decoration-none"
+                      >Home</a
+                    >
+                  </li>
+                  <li class="mb-2">
+                    <a
+                      href="{% url 'data' %}"
+                      class="text-muted small text-decoration-none"
+                      >Dashboard</a
+                    >
+                  </li>
+                  {% if user.is_authenticated and user.role == 'admin' %}
+                  <li class="mb-2">
+                    <a
+                      href="{% url 'account_list' %}"
+                      class="text-muted small text-decoration-none"
+                      >Accounts</a
+                    >
+                  </li>
+                  {% endif %}
+                </ul>
+              </div>
+              <div class="col-md-4">
+                <h5 class="mb-3" style="color: #1da4a4">Account</h5>
+                <ul class="list-unstyled">
+                  <li class="mb-2">
+                    <a
+                      href="{% url 'login' %}"
+                      class="text-muted small text-decoration-none"
+                      >Login</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div class="col-md-4">
+                <h5 class="mb-3" style="color: #1da4a4">Legal</h5>
+                <ul class="list-unstyled">
+                  <li class="mb-2">
+                    <a href="#" class="text-muted small text-decoration-none"
+                      >Terms</a
+                    >
+                  </li>
+                  <li class="mb-2">
+                    <a href="#" class="text-muted small text-decoration-none"
+                      >Privacy</a
+                    >
+                  </li>
+                  <li class="mb-2">
+                    <a href="#" class="text-muted small text-decoration-none"
+                      >Contact</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="border-top border-secondary mt-4 pt-4 d-flex flex-column flex-md-row justify-content-between align-items-center"
+        >
+          <div class="text-muted small">
+            © {% now "Y" %} DRAXLMAIER. All rights reserved.
+          </div>
+          <div class="d-flex gap-3 mt-3 mt-md-0">
+            <a href="#" class="text-muted hover-text-primary"
+              ><i class="fab fa-facebook"></i
+            ></a>
+            <a href="#" class="text-muted hover-text-primary"
+              ><i class="fab fa-twitter"></i
+            ></a>
+            <a href="#" class="text-muted hover-text-primary"
+              ><i class="fab fa-linkedin"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    {% endif %}
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+  </body>
+</html>

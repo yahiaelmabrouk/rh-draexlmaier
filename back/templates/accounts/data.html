@@ -1,0 +1,67 @@
+{% extends 'accounts/base.html' %}
+<!-- a -->
+
+{% load static %}
+
+<!-- b -->
+
+{% block content %}
+<!-- Banner -->
+<section class="bg-primary py-4">
+  <div class="text-center">
+    <h1 class="display-5 text-white mb-0">Dashboard</h1>
+  </div>
+</section>
+
+<!-- Dashboard Overview Section -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <!-- Intro Card -->
+        <div class="card shadow-sm border-0 mb-4">
+          <div class="card-body text-center p-5">
+            <h2 class="h3 fw-bold mb-4 text-dark">
+              <i class="fas fa-chart-pie me-2 text-primary"></i> Explore
+              Business Intelligence
+            </h2>
+            <p class="lead text-secondary mb-4">
+              <i class="fas fa-users me-2 text-info"></i>Unlock valuable
+              insights into <strong>absenteeism</strong>,
+              <strong>employee engagement</strong>, and
+              <strong>turnover trends</strong> using our dynamic dashboards.
+            </p>
+            <p class="text-muted mb-0">
+              Built specifically for HR leaders, this tool empowers your team to
+              make strategic workforce decisions through intuitive, data-driven
+              visuals and real-time analytics.
+            </p>
+          </div>
+        </div>
+
+        <!-- Security Notice Card -->
+        <div class="card bg-warning bg-opacity-10 border-0 shadow-sm mb-4">
+          <div class="card-body text-center p-4">
+            <i class="fas fa-exclamation-triangle text-warning fs-4 mb-2"></i>
+            <p class="mb-0 text-dark">
+              <strong>Confidential Data:</strong> Dashboard content is sensitive
+              and should only be viewed by authorized
+              <strong>HR Managers or Supervisors</strong>.
+            </p>
+          </div>
+        </div>
+
+        <!-- Action Button -->
+        <div class="text-center mt-4">
+          <a
+            href="{% url 'dashboards' %}"
+            class="btn btn-primary btn-lg px-5 py-2 shadow"
+          >
+            <i class="fas fa-chart-line me-2"></i> View Dashboard
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

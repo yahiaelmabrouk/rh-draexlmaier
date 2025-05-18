@@ -1,0 +1,63 @@
+{% extends 'accounts/base.html' %} {% load static %} {% block title %}About Us -
+DRAXLMAIER{% endblock %} {% block content %}
+
+<!-- Hero Section -->
+<section
+  class="py-5 text-white"
+  style="background: linear-gradient(to bottom, #1a1f2c, #2a2f3c)"
+>
+  <div class="container text-center">
+    <h1 class="display-4 fw-bold mb-3">About Us</h1>
+    <p class="lead">Creating innovative solutions for a connected world</p>
+  </div>
+</section>
+
+<!-- Section: Character -->
+<section class="py-5 bg-white">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <img
+          src="{% static 'assets/image 5.jpg' %}"
+          class="img-fluid shadow rounded"
+          alt="Teamwork"
+        />
+      </div>
+      <div class="col-lg-6">
+        <h2 class="fw-bold text-dark mb-3">WE CREATE CHARACTER</h2>
+        <p class="text-secondary mb-3">
+          From a family business to a global group, our journey is rooted in
+          long-term vision and shared values. We take responsibility for our
+          impact on people, the environment, and the future. This is how we
+          shape tomorrow's mobility and workplace culture.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section: Technology -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <h2 class="fw-bold text-dark mb-3">Cutting-Edge Technology</h2>
+        <p class="text-secondary mb-3">
+          Our state-of-the-art facilities and expert teams work together to
+          develop innovative solutions for the automotive and tech industries.
+          We invest in the latest technologies to stay ahead of the curve and
+          deliver exceptional products to our clients.
+        </p>
+      </div>
+      <div class="col-lg-6">
+        <img
+          src="{% static 'assets/image 3.jpg' %}"
+          class="img-fluid shadow rounded"
+          alt="Technology"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

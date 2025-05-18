@@ -1,0 +1,30 @@
+{% extends "accounts/base.html" %}
+<!-- kk -->
+
+{% block title %}Add Manager{% endblock %}
+
+<!-- ss -->
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h2 class="mb-4">Add Manager</h2>
+      {% if form.errors %}
+      <div class="alert alert-danger" role="alert">
+        {% for field in form %} {% for error in field.errors %}
+        <div>{{ error }}</div>
+        {% endfor %} {% endfor %} {% for error in form.non_field_errors %}
+        <div>{{ error }}</div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      <form method="post">
+        {% csrf_token %} {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Add Manager</button>
+        <a href="{% url 'manager_list' %}" class="btn btn-secondary">Back</a>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

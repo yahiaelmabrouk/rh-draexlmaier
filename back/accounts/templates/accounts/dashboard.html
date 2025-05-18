@@ -1,0 +1,89 @@
+{% extends "accounts/base.html" %}
+<!-- a -->
+
+{% load static %}
+
+<!-- b -->
+{% block content %}
+
+<!-- DEBUG: If you see this, the template is rendering! -->
+<div
+  style="background: yellow; color: black; padding: 10px; text-align: center"
+>
+  DEBUG: Dashboards.html template is loaded.
+</div>
+
+<div class="d-flex flex-column" style="min-height: 100vh">
+  <!-- Fixed Header -->
+  <div
+    class="d-flex justify-content-between align-items-center border-bottom px-4 py-3 bg-white"
+  >
+    <h4 id="dashboardTitle" class="mb-0 text-dark">Employee Insights</h4>
+  </div>
+  <div class="d-flex flex-grow-1">
+    <!-- Sidebar Menu -->
+    <nav class="bg-white border-end p-3" id="sidebarMenu" style="width: 250px">
+      <h5 class="mb-3">Dashboards</h5>
+      <ul class="nav flex-column">
+        <li class="nav-item mb-2">
+          <a
+            class="nav-link text-dark"
+            href="#"
+            onclick="loadDashboard('employee'); return false;"
+          >
+            👤 Employee Insights
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a
+            class="nav-link text-dark"
+            href="#"
+            onclick="loadDashboard('absence'); return false;"
+          >
+            📊 Absence Insights
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a
+            class="nav-link text-dark"
+            href="#"
+            onclick="loadDashboard('attrition'); return false;"
+          >
+            🔁 Attrition Insights
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Dashboard Viewer -->
+    <div class="flex-grow-1 p-4" style="transition: margin-right 0.3s">
+      <div
+        class="card shadow-sm border-0 rounded-4 overflow-hidden p-4 d-flex justify-content-center align-items-center"
+        style="min-height: 600px; background-color: var(--light-gray)"
+      >
+        <div class="text-center" id="loadingSection">
+          <div class="fw-bold text-secondary mb-1">
+            PowerBI Dashboard Loading...
+          </div>
+          <div
+            class="spinner-border text-primary"
+            role="status"
+            style="width: 1.5rem; height: 1.5rem"
+          >
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        <iframe
+          id="powerbiFrame"
+          src=""
+          width="100%"
+          height="600px"
+          style="border: none; display: none"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'js/main.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "accounts/base.html" %} {% block title %}Welcome Manager{% endblock
+%} {% block content %}
+<div class="container mt-5">
+  <div class="card shadow-sm">
+    <div class="card-body text-center">
+      <h1 class="mb-4">Welcome, {{ request.user.first_name }}</h1>
+      <p class="lead">You are logged in as a manager.</p>
+      <a href="{% url 'logout' %}" class="btn btn-danger">Sign Out</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
